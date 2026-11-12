@@ -40,10 +40,15 @@
     .three{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:22px}
     .card{background:var(--tint);border-radius:11px;padding:17px 19px}
     .card p{margin:0;font-size:.92rem}
+    .run-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:start;margin-top:22px}
+    .run-grid p{margin-bottom:14px}
+    figure{margin:0}
+    figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--white)}
+    figcaption{color:var(--muted);font-size:.85rem;margin-top:8px}
     .links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
     footer{background:var(--ink);color:#f1f6f2;font-size:.86rem}
     footer a{color:#e3f4e9}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:28px;padding-block:42px}.three{grid-template-columns:1fr}.section{padding-block:31px}header .wrap,footer .wrap{align-items:flex-start;flex-direction:column;gap:8px}nav{gap:14px}}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:28px;padding-block:42px}.three,.run-grid{grid-template-columns:1fr}.section{padding-block:31px}header .wrap,footer .wrap{align-items:flex-start;flex-direction:column;gap:8px}nav{gap:14px}}
     @media(max-width:400px){.wrap{width:calc(100% - 30px)}.example{padding:19px}}
   </style>
 </head>
@@ -51,7 +56,7 @@
   <header>
     <div class="wrap">
       <span class="brand">Loan Policy Explainer</span>
-      <nav aria-label="Main navigation"><a href="#examples">Examples</a><a href="#how">How it works</a><a href="#app">Get the app</a></nav>
+      <nav aria-label="Main navigation"><a href="#how">How it works</a><a href="#run">Run evidence</a><a href="#app">Get the app</a></nav>
     </div>
   </header>
   <main class="wrap">
@@ -59,7 +64,7 @@
       <div>
         <p class="course">HKU AILT9019 · Group 46</p>
         <h1 id="title">Understand your student loan terms</h1>
-        <p class="lede">Plain-English explanations of Hong Kong’s NLSFT and TSFS FAQs, with links to the official sources behind the answers.</p>
+        <p class="lede">For first-time Hong Kong student-loan applicants who need to understand terms in the NLSFT and TSFS FAQs, with plain-English explanations and links to the official sources.</p>
         <a class="button" href="#examples">Explore example questions</a>
       </div>
       <section class="example" id="examples" aria-labelledby="example-heading">
@@ -84,10 +89,28 @@
 
     <section class="section" aria-labelledby="how">
       <h2 id="how">How it works</h2>
+      <p>Our team curated official FAQ excerpts by loan scheme and built scheme-specific term matching, source citations and checks for questions outside the available evidence. In Bailian mode, the model selects from reviewed answers for the matched material.</p>
       <div class="three">
         <div class="card"><h3>Choose a scheme</h3><p>Select NLSFT or TSFS in the app and ask a short question in English.</p></div>
         <div class="card"><h3>Find relevant evidence</h3><p>The app checks the request and looks for relevant passages in its reviewed FAQ collection.</p></div>
         <div class="card"><h3>Read the explanation</h3><p>For supported questions, the app shows a plain-English answer, a hypothetical example and the supporting official quotation.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="run" aria-labelledby="evidence-heading">
+      <h2 id="evidence-heading">Run evidence</h2>
+      <p>We ran these two questions in the desktop app with the browser offline. The supported question returned an explanation, an example and an official source. The boundary case returned a refusal.</p>
+      <div class="run-grid">
+        <div>
+          <h3>Supported question</h3>
+          <p>With NLSFT selected, we entered “What does administrative fee mean?” The app matched the fee to the reviewed NLSFT FAQ excerpt. It explained that the charge covers handling the application and running the loan account, and linked to the official FAQ.</p>
+          <h3>Boundary case</h3>
+          <p>We then asked “Does the administrative fee reduce the lifetime borrowing limit?” The stored excerpts covered the two terms separately. The app refused to infer a relationship and directed the reader to the full FAQ.</p>
+        </div>
+        <figure>
+          <a href="run-example.jpg"><img src="run-example.jpg" width="1160" height="1114" loading="lazy" alt="Actual offline app run showing the NLSFT fee question, plain-English answer, example and official FAQ source."></a>
+          <figcaption>Desktop app screenshot from the supported question. Open the image for the full-size capture.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -98,7 +121,7 @@
 
     <section class="section" id="app" aria-labelledby="download">
       <h2 id="download">Run the full app</h2>
-      <p>Download and extract the Windows or Mac release. Run the launcher, then choose <strong>Offline answer</strong> to try the app without an API key. The desktop app also supports Bailian with a configured key.</p>
+      <p>Download and extract the release. Open <strong>Open-Mac.command</strong> on Mac or <strong>Open-Windows.cmd</strong> on Windows, and keep the launcher window open. Choose <strong>Offline answer</strong> to reproduce the examples above. To use Bailian, connect your key under <strong>API settings</strong> and select <strong>AI explanation</strong>.</p>
       <div class="links">
         <a class="button" href="https://github.com/adelardchow/loan-policy-explainer/releases/tag/build-5">Open build-5 release</a>
         <a href="https://github.com/adelardchow/loan-policy-explainer">Project code</a>
